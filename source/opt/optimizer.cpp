@@ -1209,6 +1209,12 @@ Optimizer::PassToken CreateCanonicalizeIdsPass() {
       MakeUnique<opt::CanonicalizeIdsPass>());
 }
 
+Optimizer::PassToken CreateConvertUBOToPushConstantPass(
+    const std::string& block_name) {
+  return MakeUnique<Optimizer::PassToken::Impl>(
+      MakeUnique<opt::ConvertUBOToPushConstantPass>(block_name));
+}
+
 }  // namespace spvtools
 
 extern "C" {

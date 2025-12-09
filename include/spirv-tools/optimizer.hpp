@@ -1032,6 +1032,14 @@ Optimizer::PassToken CreateResolveBindingConflictsPass();
 // --strip-debug because this pass will use OpName to canonicalize IDs. i.e. Run
 // --strip-debug after this pass.
 Optimizer::PassToken CreateCanonicalizeIdsPass();
+
+// Create a pass to convert a uniform buffer variable to a push constant.
+// The pass finds the variable with the specified |block_name| (matched against
+// OpName instructions), changes its storage class from Uniform to PushConstant,
+// updates all pointer types that reference this variable, and removes Binding
+// and DescriptorSet decorations.
+Optimizer::PassToken CreateConvertUBOToPushConstantPass(
+    const std::string& block_name);
 }  // namespace spvtools
 
 #endif  // INCLUDE_SPIRV_TOOLS_OPTIMIZER_HPP_
